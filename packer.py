@@ -17,21 +17,21 @@ def pack(rsakey,aeskey,ddr,spl):
     aeskey=open(aeskey,'rb').read()
     
     ddr=open(ddr,'rb').read()
-    if len(ddr)%0x200:
-        ddr+=b'\x00'*(0x200-len(ddr)%0x200)
+    if len(ddr)%0x800:
+        ddr+=b'\x00'*(0x800-len(ddr)%0x800)
     a=AES.new(aeskey, AES.MODE_CTR,nonce=nonce)
     ddr=a.encrypt(ddr)
     
-    fw=open(fw,'rb').read()
-    if len(fw)%0x200:
-        fw+=b'\x00'*(0x200-len(fw)%0x200)
+    fw=open(spl,'rb').read()
+    if len(fw)%0x800:
+        fw+=b'\x00'*(0x800-len(fw)%0x800)
     fw=a.encrypt(fw)
 
     key=RSA.importKey(open(keyfile,'rb').read())
     keyblock=(key.n).to_bytes(0x100)[::-1]
     keyblock+=b'\x00'*0x100
-    keyblock=(key.e).to_bytes(0x10)[::-1]
-    keyblock=(pow(2,2048+132)//key.n).to_bytes(0x100)[::-1]
+    keyblock+=(key.e).to_bytes(0x10)[::-1]
+    keyblock+=(pow(2,2048+132)//key.n).to_bytes(0x100)[::-1]
     keyblock+=b'\x00'*0xf0
 
     flags=0x1011
