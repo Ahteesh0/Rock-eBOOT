@@ -1,7 +1,7 @@
 # Rock eBOOT - RK35* Encrypted Boot
 
 Tested on RK3566, RK3576 and RK3588
-# WARING
+# WARNING
 This code may damage your device.
 Use at your own risk.
 The author assumes no liability for any errors or damaged devices.
