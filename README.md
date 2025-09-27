@@ -64,9 +64,9 @@ cp boot1.its build
 ```
 
 Place kernel sources to build directory 
-`build/Image`: Linux kernel ARM64 boot executable Image
-`build/Initrd`: ramdisk, ASCII cpio archive
-`build/rk3588s.dtb`: fdt
+- `build/Image`: Linux kernel ARM64 boot executable Image
+- `build/Initrd`: ramdisk, ASCII cpio archive
+- `build/rk3588s.dtb`: fdt
 
 Create linux FIT
 `./tools/mkimage -f build/boot1.its -K build/u-boot.dtb -k keys/linux_sign -E -p 0x1000 -r build/boot1.itb`
@@ -103,8 +103,8 @@ dd if=out/boot1.eitb of=<target sd part 1> #part1 name must be "boot"
 ```
 
 
-# Creatin FLASH-keys image
-These are instructions for creating an image for flashing OTP keys. The created image contains keys in clear text; do not distribute it.
+# Creating FLASH-keys image
+These are instructions for creating an image for flashing OTP keys. The created image contains keys in clear text, do not distribute it.
 
 clean dirs
 ```bash
