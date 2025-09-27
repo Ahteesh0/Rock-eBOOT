@@ -1,4 +1,5 @@
 # Rock eBOOT - RK35* Encrypted Boot
+More details in PHD2 Talk "Rock eBOOT, or how to encrypt an orange" at YouTube: [Russian](https://www.youtube.com/watch?v=RdTtpC-qc44&pp=ygUKcm9jayBlYm9vdA%3D%3D) [English](https://www.youtube.com/watch?v=nWLBWK1I4Zg&pp=ygUKcm9jayBlYm9vdA%3D%3D)
 
 Tested on RK3566, RK3576 and RK3588
 # WARNING
@@ -15,10 +16,10 @@ Use with caution and only if you understand what you are doing and how it works.
 
 ## Preparation
 
-Compile U-boot (https://github.com/Ahteesh0/u-boot-orangepi-eboot-poc) 
+Compile patched [U-boot](https://github.com/Ahteesh0/u-boot-orangepi-eboot-poc). This code/guide applies to the Orange Pi 5 board with the RK3588S SOC. If you're using a board with a different SOC or U-Boot, copy the changes to the appropriate U-Boot version. Note that the encryption key address varies depending on the SOC. Change the binaries and filenames in the .its files to the appropriate versions if you're using a different SOC. The RK3576 requires a slightly different packer, which will be released soon.
 `make clean && make rk3588_defconfig && CROSS_COMPILE=aarch64-linux-gnu- make  BL31=../rkbin/bin/rk35/rk3588_bl31_v1.48.elf spl/u-boot-spl.bin u-boot.dtb u-boot.itb` (for RK3588. RK3566/RK3576 U-boot can be created by appling same patchs to sources)
 
-Copy files from compiled u-boot
+Copy files from compiled u-boot. 
 `tools/mkimage` to `tools/`
 `bl31_0x00040000.bin`, `bl31_0x000f0000.bin`, `bl31_0xff100000.bin`, `u-boot.dtb`, `u-boot.its`, `u-boot-nodtb.bin` to `u-boot/`
 `u-boot-spl.dtb`, `u-boot-spl-nodtb.bin` to `spl/`
