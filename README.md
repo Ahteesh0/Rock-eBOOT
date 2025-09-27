@@ -1,7 +1,6 @@
 # Rock eBOOT - RK35* Encrypted Boot
 
 Tested on RK3566, RK3576 and RK3588
-
 # WARING
 This code may damage your device.
 Use at your own risk.
@@ -17,7 +16,7 @@ Use with caution and only if you understand what you are doing and how it works.
 ## Preparation
 
 Compile U-boot (https://github.com/Ahteesh0/u-boot-orangepi-eboot-poc) 
-`make clean && make rk3588_defconfig && CROSS_COMPILE=aarch64-linux-gnu- make  BL31=../rkbin/bin/rk35/rk3588_bl31_v1.48.elf spl/u-boot-spl.bin u-boot.dtb u-boot.itb`
+`make clean && make rk3588_defconfig && CROSS_COMPILE=aarch64-linux-gnu- make  BL31=../rkbin/bin/rk35/rk3588_bl31_v1.48.elf spl/u-boot-spl.bin u-boot.dtb u-boot.itb` (for RK3588. RK3566/RK3576 U-boot can be created by appling same patchs to sources)
 
 Copy files from compiled u-boot
 `tools/mkimage` to `tools/`
