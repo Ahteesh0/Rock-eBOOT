@@ -1,0 +1,66 @@
+/*
+ * Copyright (C) 2021 Rockchip Electronics Co., Ltd
+ *
+ * SPDX-License-Identifier: GPL-2.0
+ */
+
+/dts-v1/;
+/ {
+    description = "FIT image with Linux kernel, FDT blob and resource";
+
+    images {
+        kernel {
+            data = /incbin/("./Image");
+            type = "kernel";
+            arch = "arm64";
+            os = "linux";
+            compression = "NONE";
+            load = <0x00400000>;
+            entry = <0x00400000>;
+
+            hash {
+                algo = "sha256";
+            };
+        };
+        fdt {
+            data = /incbin/("./rk3588s-orangepi-5-1.dtb");
+            type = "flat_dt";
+            arch = "arm64";
+            compression = "NONE";
+            load = <0x0a100000>;
+            hash {
+                algo = "sha256";
+            };
+        };
+        ramdisk {
+            data = /incbin/("./ramdisk0");
+            type = "ramdisk";
+            arch = "arm64";
+            os = "linux";
+            compression = "NONE";
+            load = <00000000>;  
+            entry = <00000000>;
+            hash {
+                algo = "sha256";
+            };
+        };
+    };
+
+    configurations {
+        default = "conf";
+
+        conf {
+            rollback-index = <0x00>;
+            fdt = "fdt";
+            kernel = "kernel";
+            ramdisk = "ramdisk";
+
+            signature {
+                algo = "sha256,rsa2048";
+                padding = "pss";
+                key-name-hint = "dev";
+                sign-images = "fdt", "kernel","ramdisk";
+            };
+        };
+    };
+};
