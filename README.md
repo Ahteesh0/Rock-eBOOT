@@ -60,7 +60,7 @@ mkdir build
 rm -rf build/*
 cp u-boot/* build
 cp spl/* build
-cp boot1.its build
+cp kernel/boot1.its build
 ```
 
 Place kernel sources to build directory 
@@ -114,7 +114,7 @@ mkdir build
 rm -rf build/*
 cp u-boot/* build
 cp spl/* build
-cp boot1.its build
+cp kernel/boot1.its build
 ```
 
 For flahsing keys create u-boot FIT signed and encrypted by spl keys:
