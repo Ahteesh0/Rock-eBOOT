@@ -14,6 +14,10 @@ Some places contain dirty hacks.
 This code has undergone limited testing and may contain errors. 
 Use with caution and only if you understand what you are doing and how it works.
 
+# Note
+This instruction does not cover the creation of an encrypted root partition, as this can be considered a standard Linux configuration procedure. 
+The purpose of the actions described in this instruction is to create a secure keys storage in initramfs
+
 ## Preparation
 
 Compile patched [U-boot](https://github.com/Ahteesh0/u-boot-orangepi-eboot-poc). This code/guide applies to the Orange Pi 5 board with the RK3588S SOC. If you're using a board with a different SOC or U-Boot, copy the changes to the appropriate U-Boot version. Note that the encryption key address varies depending on the SOC. Change the binaries and filenames in the .its files to the appropriate versions if you're using a different SOC. The RK3576 requires a slightly different packer, which will be released soon.
@@ -92,7 +96,7 @@ Encrypt U-boot FIT
 Create SPL 
 ```
 cat build/u-boot-spl-nodtb.bin build/u-boot-spl.dtb > build/u-boot-spl.bin
-python3 ./tools/packer.py  keys/spl_sign/private_key.pem  keys/spl_enc/key build/rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v1.18.bin build/u-boot-spl.bin  out/idbloader.img
+python3 ./tools/packer.py  keys/spl_sign/dev.key keys/spl_enc/key build/rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v1.18.bin build/u-boot-spl.bin  out/idbloader.img
 ```
 
 Write U-boot to microsd
